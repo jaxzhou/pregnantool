@@ -4,7 +4,12 @@ import {User} from './userinfo'
 function initModels(opts) {
   let mongohost = opts.server || 'localhost'
   let mongodb = opts.database || 'test'
-  let mongoURL = `mongodb://${mongohost}/${mongodb}`
+  let port = opts.port || '27017'
+  let auth = ''
+  if (opts.user && opts.psw) {
+    auth = `${opts.user}:${opts.psw}@`
+  }
+  let mongoURL = `mongodb://${auth}${mongohost}:${port}/${mongodb}`
   mongoose.connect(mongoURL)
 }
 
