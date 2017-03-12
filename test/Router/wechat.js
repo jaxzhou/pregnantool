@@ -3,6 +3,20 @@ import {server} from '../../index.js'
 import {parseString} from 'xml2js'
 import expect from 'expect'
 
+describe("GET /wechat", ()=>{
+  let mockRequest = supertest(server)
+
+  it("verify success", (done)=>{
+    mockRequest
+    .get("/wechat?signature=s1&timestamp=0&nonce=1&echostr=echo")
+    .expect(200,'"echo"')
+    .end((err,res)=>{
+      if (err) return done(err)
+      done()
+    })
+  })
+})
+
 describe("POST /wechat", ()=> {
   let mockRequest = supertest(server)
 

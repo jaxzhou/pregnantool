@@ -26,6 +26,11 @@ class Wechat {
   constructor(server) {
     this.server = server
     server.post("/wechat", this.postMessage.bind(this))
+    server.get("/wechat", this.getMessage.bind(this))
+  }
+
+  getMessage(req, res, next){
+    res.send(req.params.echostr)
   }
 
   postMessage(req, res, next) {
