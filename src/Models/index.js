@@ -10,6 +10,7 @@ function initModels(opts) {
     auth = `${opts.user}:${opts.psw}@`
   }
   let mongoURL = `mongodb://${auth}${mongohost}:${port}/${mongodb}`
+  console.log(mongoURL);
   mongoose.connect(mongoURL)
 }
 
