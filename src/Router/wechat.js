@@ -22,14 +22,14 @@ function createTextMessage(content, userOpenId, fromOpenId) {
 }
 
 function buildInfoList(infos) {
-  let grid = "|     时间    | 体重 | 腰围 | \n"
-  grid += "------------------- \n"
+  let bufferArray = []
+  bufferArray.push(Buffer.from("|     时间    | 体重 | 腰围 | \n")) 
+  bufferArray.push(Buffer.from("--------------------------- \n")) 
   for(let info of infos) {
-    let line = `| ${info.time.toDateString()} | ${info.weight}kg | ${info.waist}cm | `
-    grid += line
-    grid += "\n"
+    bufferArray.push(Buffer.from(`| ${info.time.toDateString()} | ${info.weight}kg | ${info.waist}cm | `)) 
+    bufferArray.push(Buffer.from("\n")) 
   }
-  return grid
+  return Buffer.concat(bufferArray).toString('utf8')
 }
 
 class Wechat {
