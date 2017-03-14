@@ -21,6 +21,16 @@ function createTextMessage(content, userOpenId, fromOpenId) {
   return `<xml>${xml}</xml>`
 }
 
+function buildInfoList(infos) {
+  let grid = '| 时间 | 体重 | 腰围 |\n'
+  grid += '-------------------\n'
+  for(let info of infos) {
+    let line = `| ${info.time.toDateString()} | ${info.weight}kg | ${info.waist}cm |`
+    grid += line
+  }
+  return grid
+}
+
 class Wechat {
 
   constructor(server) {
@@ -40,7 +50,6 @@ class Wechat {
   }
 
   postMessage(req, res, next) {
-    console.log(req.body)
     parseString.call(this, req.body, (err,result)=> {
       if (err) {
         console.log(err)
@@ -100,7 +109,8 @@ class Wechat {
         }
       }
       user.save(()=>{
-        callback(createTextMessage(txt, userOpenId, textMessage.ToUserName))
+        let info = buildInfoList(user.infos)
+        callback(createTextMessage(info, userOpenId, textMessage.ToUserName))
       })
     })
   }
@@ -113,7 +123,8 @@ class Wechat {
   }
 
   subscribe(eventMessage, callback) {
-
+    let userOpenId = eventMessage.FromUserName
+    return callback(createTextMessage('按照格式输入体重腰围:  50kg  82cm', userOpenId, eventMessage.ToUserName))
   }
 }
 
