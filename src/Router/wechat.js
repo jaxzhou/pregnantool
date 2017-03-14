@@ -27,7 +27,7 @@ function buildInfoList(infos) {
   bufferArray.push(Buffer.from("--------------------------- \n/n")) 
   for(let info of infos) {
     bufferArray.push(Buffer.from(`| ${info.time.toDateString()} | ${info.weight}kg | ${info.waist}cm | `)) 
-    bufferArray.push(Buffer.from("\n")) 
+    bufferArray.push(0x0a) 
   }
   return Buffer.concat(bufferArray).toString('utf8')
 }
