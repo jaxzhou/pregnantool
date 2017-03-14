@@ -40,8 +40,10 @@ class Wechat {
   }
 
   postMessage(req, res, next) {
+    console.log(req.body)
     parseString.call(this, req.body, (err,result)=> {
       if (err) {
+        console.log(err)
         return next(err)
       }
       if (result && result.xml) {
@@ -52,6 +54,7 @@ class Wechat {
             res.send(200, resMessage)
           })
         } else {
+          console.log('message type not support')
           next(new Error('message type not support'))
         }
       }
