@@ -22,10 +22,10 @@ function createTextMessage(content, userOpenId, fromOpenId) {
 }
 
 function buildInfoList(infos) {
-  let grid = '| 时间 | 体重 | 腰围 |\n'
-  grid += '-------------------\n'
+  let grid = '| 时间 | 体重 | 腰围 |\r\n'
+  grid += '-------------------\r\n'
   for(let info of infos) {
-    let line = `| ${info.time.toDateString()} | ${info.weight}kg | ${info.waist}cm |`
+    let line = `| ${info.time.toDateString()} | ${info.weight}kg | ${info.waist}cm |\r\n`
     grid += line
   }
   return grid
