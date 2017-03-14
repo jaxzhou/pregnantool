@@ -30,7 +30,13 @@ class Wechat {
   }
 
   getMessage(req, res, next){
-    res.send(req.params.echostr)
+    let echostr = req.params.echostr
+    res.writeHead(200, {
+      'Content-Length': Buffer.byteLength(echostr),
+      'Content-Type': 'text/application'
+    })
+    res.write(echostr)
+    res.end()
   }
 
   postMessage(req, res, next) {

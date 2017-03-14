@@ -9,7 +9,7 @@ describe("GET /wechat", ()=>{
   it("verify success", (done)=>{
     mockRequest
     .get("/wechat?signature=s1&timestamp=0&nonce=1&echostr=echo")
-    .expect(200,'"echo"')
+    .expect(200,"echo")
     .end((err,res)=>{
       if (err) return done(err)
       done()
