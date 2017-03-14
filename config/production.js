@@ -4,7 +4,7 @@ let server = {
     host: 'localhost'
   }
 let mongodb = {
-    server: 'mongodb.ca1bab1ddbb5748308718a9a949a57094.cn-beijing.alicontainer.com',
+    server: '192.168.1.5',
     database: 'pregnant'
   }
 let wechat = {
