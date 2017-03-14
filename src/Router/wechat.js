@@ -11,7 +11,7 @@ function createTextMessage(content, userOpenId, fromOpenId) {
       FromUserName: wrapCDATA(fromOpenId),
       CreateTime: parseInt(new Date().getTime()),
       MsgType: wrapCDATA('text'),
-      Content: wrapCDATA(content)
+      Content: content
     }
   let xml = ""
   for (let key in xmlObject) {
@@ -27,7 +27,7 @@ function buildInfoList(infos) {
   bufferArray.push(Buffer.from("--------------------------- \n/n")) 
   for(let info of infos) {
     bufferArray.push(Buffer.from(`| ${info.time.toDateString()} | ${info.weight}kg | ${info.waist}cm | `)) 
-    bufferArray.push(0x0a) 
+    bufferArray.push(Buffer.from("\n")) 
   }
   return Buffer.concat(bufferArray).toString('utf8')
 }
