@@ -4,11 +4,8 @@ let server = {
     host: 'localhost'
   }
 let mongodb = {
-    server: 'dds-2zec7b0f3537f8242.mongodb.rds.aliyuncs.com',
-    port: 3717,
-    database: 'pregnant',
-    user: 'root',
-    psw: 'Acenotgo84'
+    server: 'mongodb.ca1bab1ddbb5748308718a9a949a57094.cn-beijing.alicontainer.com',
+    database: 'pregnant'
   }
 let wechat = {
   appID: 'wx2cb42973bb446ef1',
