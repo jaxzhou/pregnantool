@@ -24,7 +24,8 @@ function createTextMessage(content, userOpenId, fromOpenId) {
 function buildInfoList(infos) {
   let bufferArray = []
   for(let info of infos) {
-    bufferArray.push(Buffer.from(`| ${info.time.toDateString()} | ${info.weight}kg | ${info.waist}cm |`)) 
+
+    bufferArray.push(Buffer.from(`| ${info.time.getYear()}/${info.time.getMonth()+1}/${info.time.getDate()} | ${info.weight}kg | ${info.waist}cm |`)) 
   }
 
   return Buffer.concat(bufferArray).toString('utf8')
@@ -100,8 +101,9 @@ class Wechat {
       } else {
         let lastinfo = user.infos[user.infos.length-1]
         let lastdate = lastinfo.time.toDateString()
-        let now = new Date().toDateString()
-        if (now === lastdate) {
+        let now = new Date()
+        let nowDateStr = now.toDateString()
+        if (nowDateStr === lastdate) {
           lastinfo.weight = info.weight || lastinfo.weight
           lastinfo.waist = info.waist || lastinfo.waist
         } else {
