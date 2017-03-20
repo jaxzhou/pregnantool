@@ -23,11 +23,8 @@ function createTextMessage(content, userOpenId, fromOpenId) {
 
 function buildInfoList(infos) {
   let bufferArray = []
-  bufferArray.push(Buffer.from("|     时间    | 体重 | 腰围 |\r\n")) 
-  bufferArray.push(Buffer.from("---------------------------\r\n")) 
   for(let info of infos) {
     bufferArray.push(Buffer.from(`| ${info.time.toDateString()} | ${info.weight}kg | ${info.waist}cm |`)) 
-    bufferArray.push(Buffer.from("\r\n")) 
   }
 
   return Buffer.concat(bufferArray).toString('utf8')
