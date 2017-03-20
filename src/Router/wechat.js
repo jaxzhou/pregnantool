@@ -25,7 +25,7 @@ function buildInfoList(infos) {
   let bufferArray = []
   for(let info of infos) {
 
-    bufferArray.push(Buffer.from(`| ${info.time.getYear()}/${info.time.getMonth()+1}/${info.time.getDate()} | ${info.weight}kg | ${info.waist}cm |`)) 
+    bufferArray.push(Buffer.from(`| ${info.time.getFullYear()}/${info.time.getMonth()+1}/${info.time.getDate()} | ${info.weight}kg | ${info.waist}cm |`)) 
   }
 
   return Buffer.concat(bufferArray).toString('utf8')
