@@ -4,7 +4,8 @@ import {addModel} from './index'
 let info = new Schema({
   time: { type: Date, default: Date.now },
   weight: Number,
-  waist: Number
+  waist: Number,
+  fundal: Number
 })
 
 let user = new Schema({

@@ -87,13 +87,18 @@ class Wechat {
     let txt = ""
     let info = {}
     if (weight) {
-      console.log(weight);
       txt += `体重记录为${weight[1]}kg`
       info.weight = weight[1]
     }
     if (waist) {
-      txt += `腰围记录为${waist[1]}cm`
-      info.waist = waist[1]
+      let value = Number(waist[1])
+      if (value < 50) {
+        txt += `宫高记录为${waist[1]}cm`
+        info.fundal = waist[1]
+      } else {
+        txt += `腰围记录为${waist[1]}cm`
+        info.waist = waist[1]
+      }
     }
     User.findOne({openid:userOpenId}, (err, user)=>{
       if(!user) {
@@ -106,6 +111,7 @@ class Wechat {
         if (nowDateStr === lastdate) {
           lastinfo.weight = info.weight || lastinfo.weight
           lastinfo.waist = info.waist || lastinfo.waist
+          lastinfo.fundal = info.fundal || lastinfo.fundal
         } else {
           user.infos.push(info)
         }
