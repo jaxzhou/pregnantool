@@ -56,7 +56,7 @@ describe("POST /wechat", ()=> {
      <FromUserName><![CDATA[fromUser_001]]></FromUserName>\
      <CreateTime>1348831860</CreateTime>\
      <MsgType><![CDATA[text]]></MsgType>\
-     <Content><![CDATA[85kg]]></Content>\
+     <Content><![CDATA[85.4kg]]></Content>\
      <MsgId>1234567890123456</MsgId>\
      </xml>")
     .expect((res)=>{

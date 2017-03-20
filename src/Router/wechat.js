@@ -23,13 +23,13 @@ function createTextMessage(content, userOpenId, fromOpenId) {
 
 function buildInfoList(infos) {
   let bufferArray = []
-  bufferArray.push(Buffer.from("|     时间    | 体重 | 腰围 | \r\n")) 
-  bufferArray.push(Buffer.from("--------------------------- \r\n")) 
+  bufferArray.push(Buffer.from("|     时间    | 体重 | 腰围 |\r\n")) 
+  bufferArray.push(Buffer.from("---------------------------\r\n")) 
   for(let info of infos) {
-    bufferArray.push(Buffer.from(`| ${info.time.toDateString()} | ${info.weight}kg | ${info.waist}cm | `)) 
+    bufferArray.push(Buffer.from(`| ${info.time.toDateString()} | ${info.weight}kg | ${info.waist}cm |`)) 
     bufferArray.push(Buffer.from("\r\n")) 
   }
-  
+
   return Buffer.concat(bufferArray).toString('utf8')
 }
 
@@ -81,14 +81,15 @@ class Wechat {
   text(textMessage, callback) {
     let userOpenId = textMessage.FromUserName
     let content = textMessage.Content[0]
-    let weight = content.match(/(\d+)kg/)
-    let waist = content.match(/(\d+)cm/)
+    let weight = content.match(/(\d+.?\d+?)kg/)
+    let waist = content.match(/(\d+.?\d+?)cm/)
     if (!weight && !waist) {
       return callback(createTextMessage('按照格式输入体重腰围:  50kg  82cm', userOpenId, textMessage.ToUserName))
     }
     let txt = ""
     let info = {}
     if (weight) {
+      console.log(weight);
       txt += `体重记录为${weight[1]}kg`
       info.weight = weight[1]
     }
