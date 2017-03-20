@@ -103,4 +103,33 @@ describe("POST /wechat", ()=> {
     })
 
   })
+
+  it('receive fundal height message', (done)=> {
+    mockRequest
+    .post("/wechat")
+    .send("<xml>\
+     <ToUserName><![CDATA[toUser_001]]></ToUserName>\
+     <FromUserName><![CDATA[fromUser_001]]></FromUserName>\
+     <CreateTime>1348831860</CreateTime>\
+     <MsgType><![CDATA[text]]></MsgType>\
+     <Content><![CDATA[32cm]]></Content>\
+     <MsgId>1234567890123456</MsgId>\
+     </xml>")
+    .expect((res)=>{
+      parseString(res.body,(err,result)=>{
+        expect(result).toExist()
+        expect(result.xml).toExist()
+        expect(result.xml.ToUserName[0]).toBe('fromUser_001')
+        expect(result.xml.FromUserName[0]).toBe('toUser_001')
+        expect(result.xml.MsgType[0]).toBe('text')
+      })
+    })
+    .expect(200)
+    .end(function(err, res) {
+      if (err) return done(err);
+      done();
+    })
+
+  })
+
 })
